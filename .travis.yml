@@ -28,7 +28,7 @@ after_success:
   - if [ "$TRAVIS_BRANCH" = "newstaging" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then export REPO=akash4927/newstaging-openebs-docs;
        docker login -u "$DOCKER_USER" -p "$DOCKER_PASS" && docker build -t $REPO:$COMMIT . && docker push $REPO;
     fi
-  - if: tag IS present  then export REPO=akash4927/newstaging-openebs-docs;
+  - if: tag IS present ; then export REPO=akash4927/newstaging-openebs-docs;
        docker login -u "$DOCKER_USER" -p "$DOCKER_PASS" && docker build -t $REPO:$COMMIT . && docker push $REPO;
        
 
