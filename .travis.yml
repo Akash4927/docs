@@ -2,7 +2,7 @@ language: node_js
 node_js: stable
 env:
   global:
-   - COMMIT=${TRAVIS_COMMIT::6}
+   - COMMIT=${TRAVIS_TAG}-${TRAVIS_COMMIT::6}
 
 sudo: required
 services:
@@ -28,3 +28,7 @@ after_success:
   - if [ "$TRAVIS_BRANCH" = "newstaging" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then export REPO=akash4927/newstaging-openebs-docs;
        docker login -u "$DOCKER_USER" -p "$DOCKER_PASS" && docker build -t $REPO:$COMMIT . && docker push $REPO;
     fi
+  - if: tag IS present  then export REPO=akash4927/newstaging-openebs-docs;
+       docker login -u "$DOCKER_USER" -p "$DOCKER_PASS" && docker build -t $REPO:$COMMIT . && docker push $REPO;
+       
+
