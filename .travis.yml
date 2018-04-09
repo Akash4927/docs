@@ -10,12 +10,14 @@ services:
 before_script:
   - npm install
 script:
-  - python tag.py
-  - cd website
-  - npm install docusaurus
-  - npm run build
-  - cd ..
-  - 
+  on:
+    tags: true
+      - python tag.py
+      - cd website
+      - npm install docusaurus
+      - npm run build
+      - cd ..
+      - 
 after_success:
   - if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then export REPO=mayadataio/openebs-docs;
      docker login -u "$DOCKER_USER" -p "$DOCKER_PASS" && docker build -t $REPO:$COMMIT . && docker push $REPO; 
