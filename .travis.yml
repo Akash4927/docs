@@ -10,8 +10,6 @@ services:
 before_script:
   - npm install
 script:
-  on:
-    tags: true
   - python tag.py
   - cd websi/te
   - npm install docusaurus
